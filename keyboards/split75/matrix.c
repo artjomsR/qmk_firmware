@@ -210,7 +210,7 @@ void matrix_set_row_status(uint8_t row) {
 
     //Set the local row on port B
     DDRB = (1 << row);
-    PORTB = ~(1 << row);
+    PORTB = ~(1 << row);t saht 
 }
 
 uint8_t bit_reverse(uint8_t x) {
