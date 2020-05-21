@@ -21,6 +21,9 @@ int char_to_del = 1;
 static bool sarcasm_on = false;
 static bool sarcasm_key = false;
 
+static const int copy_delay = 50;
+static const int incognito_delay = 500;
+
 void backspace_n_times(int times) {
   for (int i=0; i<times; i++) {
     SEND_STRING(SS_TAP(X_BSPC));  
@@ -203,11 +206,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
      * ------------------------------------------------------------------------ */
     case CTRL_CTV:
       if (record->event.pressed) {
-        if ( get_mods() & MOD_MASK_SHIFT ) {
-          clear_mods();
-          SEND_STRING(SS_LCTL("ctv"));
-        } else {
-          SEND_STRING(SS_LCTL("ctv") SS_TAP(X_ENTER));
+        bool shifted = get_mods() & MOD_MASK_SHIFT;
+        clear_mods();
+
+        SEND_STRING(SS_LCTL("c"));
+        wait_ms(copy_delay);
+        SEND_STRING(SS_LCTL("tv"));
+
+        if (shifted) {
+          SEND_STRING(SS_TAP(X_ENTER));
         }
       }
       break;
@@ -216,22 +223,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if ( get_mods() & MOD_MASK_SHIFT ) {
           //Firefox
           clear_mods();
-          SEND_STRING(SS_LCTL("lcP"));
-          wait_ms(200);
+          SEND_STRING(SS_LCTL("lc"));
+          wait_ms(copy_delay);
+          SEND_STRING(SS_LCTL("P"));
+          wait_ms(incognito_delay);
           SEND_STRING(SS_LCTL("v") SS_TAP(X_ENTER));
         } else if ( get_mods() & MOD_MASK_CTRL ) {
           //Chrome
           clear_mods();
-          SEND_STRING(SS_LCTL("lcNv") SS_TAP(X_ENTER));
+          SEND_STRING(SS_LCTL("lc"));
+          wait_ms(copy_delay);
+          SEND_STRING(SS_LCTL("Nv") SS_TAP(X_ENTER));
         } else {
-          SEND_STRING(SS_LCTL("lctv"));
+          SEND_STRING(SS_LCTL("lc"));
+          wait_ms(copy_delay);
+          SEND_STRING(SS_LCTL("tv"));
         }
       }
       break;
     case CTRL_CAV:
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("c" SS_TAP(X_TAB)));
-        wait_ms(50);
+        wait_ms(copy_delay);
         SEND_STRING(SS_LCTL("av"));
       }
       break;
@@ -320,7 +333,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case FOURS:
       if (record->event.pressed) {
-        SEND_STRING("4444333322221111\t1\t12\t21\t123\n");
+        SEND_STRING("4444333322221111");
+        wait_ms(copy_delay);
+        SEND_STRING("\t1");
+        wait_ms(copy_delay);
+        SEND_STRING("\t1221");
+        wait_ms(copy_delay);
+        SEND_STRING("\t123");
+        wait_ms(copy_delay);
+        SEND_STRING("\n");
         char_to_del = 16;
       }
       break;
@@ -358,18 +379,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
   case G_COMM:
     if (!record->event.pressed) {
+      bool ctrled = get_mods() & MOD_MASK_CTRL;
       bool shifted = get_mods() & MOD_MASK_SHIFT;
       clear_mods();
-      
+
       backspace_n_times(15);
-      SEND_STRING("ommit -");
+      SEND_STRING("ommit ");
+      char_to_del = 11;
+      layer_off(GIT_C);
+
+      if (ctrled) {
+        return false;
+      }
+
+      SEND_STRING("-");
       char_to_del = 15;
       if (shifted) {
         SEND_STRING("a");
         char_to_del = 16;
       }
       SEND_STRING("m \"\"" SS_TAP(X_LEFT));
-      layer_off(GIT_C);
     }
     break;
   case G_DEV:
