@@ -145,12 +145,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (mac_alt_window_switching_on) {
           unregister_mods(MOD_LCTL);
           mac_alt_window_switching_on = false;
+          return false;
         } else if (mac_gui_on) {
           SEND_STRING(SS_UP(X_LGUI));
           mac_gui_on = false;
+          return false;
         }
-        return false;
-
+        return true;
       }
       break;
     case KC_RALT:
