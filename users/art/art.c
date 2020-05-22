@@ -12,7 +12,7 @@ void led_show_current_os(void) {
 
 static bool mac_ctrl_on = false; //for switching tabs
 static bool mac_gui_on = false; //for switching languages
-static bool mac_alt_tab_on = false; //for switching windows
+static bool mac_alt_window_switching_on = false; //for switching windows
 
 static const char *key_up[2] = {SS_UP(X_LALT), SS_UP(X_LCTL)};
 static const char *key_down[2] = {SS_DOWN(X_LALT), SS_DOWN(X_LCTL)};
@@ -76,19 +76,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_TAB:
       if (record->event.pressed && is_mac_with_base_layer_off()) {
-        uint8_t mods = get_mods();
-        uint8_t mod_state = mods & MOD_MASK_ALT;
-        if (get_mods() & mod_state) {
-          del_mods(mod_state);
-          add_mods(MOD_LCTL);
-          mac_alt_tab_on = true;
-        }
-
-        mod_state = mods & MOD_MASK_CTRL;
-        if (get_mods() & mod_state && !mac_alt_tab_on) {
+        uint8_t mod_state = get_mods() & MOD_MASK_CTRL;
+        if (get_mods() & mod_state && !mac_alt_window_switching_on) {
           del_mods(mod_state);
           add_mods(MOD_LGUI);
           mac_ctrl_on = true;
+        }
+      }
+    case KC_GRAVE:
+      if (record->event.pressed && is_mac_with_base_layer_off()) {
+        uint8_t mod_state = get_mods() & MOD_MASK_ALT;
+        if (get_mods() & mod_state) {
+          del_mods(mod_state);
+          add_mods(MOD_LCTL);
+          mac_alt_window_switching_on = true;
         }
       }
       break;
@@ -116,13 +117,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         uint8_t mods = get_mods();
         uint8_t mod_state = mods & MOD_MASK_ALT;
         //Allows Ctrl <-/-> on Mac if Ctrl Tab is already pressed
-        if (get_mods() & mod_state && mac_alt_tab_on && !mac_ctrl_on) {
+        if (get_mods() & mod_state && mac_alt_window_switching_on && !mac_ctrl_on) {
           del_mods(mod_state);
           add_mods(MOD_LCTL);
         }
 
         mod_state = mods & MOD_MASK_CTRL;
-        if (get_mods() & mod_state && !mac_alt_tab_on && !mac_gui_on) {
+        if (get_mods() & mod_state && !mac_alt_window_switching_on && !mac_gui_on) {
           del_mods(mod_state);
           add_mods(MOD_LALT);
           mac_ctrl_on = true;
@@ -141,21 +142,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case KC_LALT:
       if (!record->event.pressed && is_mac_with_base_layer_off()) {
-        if (mac_alt_tab_on) {
+        if (mac_alt_window_switching_on) {
           unregister_mods(MOD_LCTL);
-          mac_alt_tab_on = false;
-          return false;
+          mac_alt_window_switching_on = false;
         } else if (mac_gui_on) {
           SEND_STRING(SS_UP(X_LGUI));
           mac_gui_on = false;
-          return false;
         }
+        return false;
+
       }
       break;
     case KC_RALT:
-      if (!record->event.pressed && mac_alt_tab_on && is_mac_with_base_layer_off()) {
+      if (!record->event.pressed && mac_alt_window_switching_on && is_mac_with_base_layer_off()) {
         unregister_mods(MOD_LCTL);
-        mac_alt_tab_on = false;
+        mac_alt_window_switching_on = false;
         return false;
       }
       break;
