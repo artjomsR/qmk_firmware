@@ -93,7 +93,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
     case KC_LSFT:
-      if (record->event.pressed && is_mac_with_base_layer_off()) {
+      if (record->event.pressed && is_mac_with_base_layer_off() && !mac_ctrl_on) {
         uint8_t mods = get_mods();
         uint8_t mod_state = mods & MOD_MASK_AG;
         if (get_mods() & mod_state) {
@@ -122,7 +122,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
 
         mod_state = mods & MOD_MASK_CTRL;
-        if (get_mods() & mod_state && !mac_alt_tab_on) {
+        if (get_mods() & mod_state && !mac_alt_tab_on && !mac_gui_on) {
           del_mods(mod_state);
           add_mods(MOD_LALT);
           mac_ctrl_on = true;
@@ -339,7 +339,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         wait_ms(copy_delay);
         SEND_STRING("\t1221");
         wait_ms(copy_delay);
-        SEND_STRING("\t123");
+        SEND_STRING("\t");
+        wait_ms(copy_delay);
+        SEND_STRING("123");
         wait_ms(copy_delay);
         SEND_STRING("\n");
         char_to_del = 16;
