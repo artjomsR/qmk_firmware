@@ -14,8 +14,7 @@ static bool mac_ctrl_on = false; //for switching tabs
 static bool mac_gui_on = false; //for switching languages
 static bool mac_alt_window_switching_on = false; //for switching windows
 
-static const char *key_up[2] = {SS_UP(X_LALT), SS_UP(X_LCTL)};
-static const char *key_down[2] = {SS_DOWN(X_LALT), SS_DOWN(X_LCTL)};
+static const uint8_t os_mod_keys[2] = {MOD_LALT, MOD_LCTL};
 
 int char_to_del = 1;
 static bool sarcasm_on = false;
@@ -147,7 +146,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           mac_alt_window_switching_on = false;
           return false;
         } else if (mac_gui_on) {
-          SEND_STRING(SS_UP(X_LGUI));
+          unregister_mods(MOD_LGUI);
           mac_gui_on = false;
           return false;
         }
@@ -164,7 +163,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case KC_LCTL:
     case KC_RCTL:
       if (!record->event.pressed && mac_ctrl_on && is_mac_with_base_layer_off()) {
-        SEND_STRING(SS_UP(X_LGUI) SS_UP(X_LALT));
+        unregister_mods(MOD_LGUI);
+        unregister_mods(MOD_LALT);
         mac_ctrl_on = false;
         return false;
       }
@@ -267,9 +267,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case CTR_ALT:
       if (record->event.pressed) {
-        send_string(key_down[is_win]);
+        add_mods(os_mod_keys[is_win]);
       } else {
-        send_string(key_up[is_win]);
+        unregister_mods(os_mod_keys[is_win]);
       }
       break;
     case OS_CTRL:
