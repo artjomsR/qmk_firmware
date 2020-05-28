@@ -60,16 +60,19 @@ bool is_mac_with_base_layer_off(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (sarcasm_on) {
-    sarcasm_key = ! sarcasm_key;  
-    if (sarcasm_key) {
-      SEND_STRING(SS_TAP(X_CAPS));
+  if (record->event.pressed) {
+    //Checking all other non-backspace keys to clear the backspace buffer. This is to prevent the bug of deleting N chars sometime after using a macro
+    if (keycode != KC_BSPACE && keycode != XXXXXXX) {
+      char_to_del = 1;
     }
-  }
 
-  //Checking all other non-backspace keys to clear the backspace buffer. This is to prevent the bug of deleting N chars sometime after using a macro
-  if (record->event.pressed && (keycode != KC_BSPACE && keycode != XXXXXXX)) {
-    char_to_del = 1;
+    if (sarcasm_on) {
+      sarcasm_key = ! sarcasm_key;
+      del_mods(MOD_LSFT);
+      if (sarcasm_key) {
+        add_mods(MOD_LSFT);
+      }
+    }
   }
 
   switch (keycode) {
@@ -163,6 +166,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case KC_LCTL:
     case KC_RCTL:
       if (!record->event.pressed && mac_ctrl_on && is_mac_with_base_layer_off()) {
+        // Need to remove only previously set mods (e.g. WIN & ALT) to preserve Shift, etc
         unregister_mods(MOD_LGUI);
         unregister_mods(MOD_LALT);
         mac_ctrl_on = false;
@@ -252,6 +256,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case SARCASM:
       if (record->event.pressed) {
+        del_mods(MOD_LSFT);
         sarcasm_on = !sarcasm_on;
       }
       break;
@@ -344,8 +349,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("\t");
         wait_ms(copy_delay);
         SEND_STRING("123");
-        wait_ms(copy_delay);
-        SEND_STRING("\n");
+        // wait_ms(copy_delay);
+        // SEND_STRING("\n");
         char_to_del = 16;
       }
       break;
