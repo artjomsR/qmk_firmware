@@ -20,7 +20,7 @@ enum layer_names {
 
   MEDIA,
   COMBOS,
-  STRINGS,
+  //STRINGS,
   CONFIG,
   NAV,
   NUMPAD,
@@ -41,6 +41,9 @@ enum custom_keycodes_art {
   OS_WIN,
 
   TILD_BLOCK,
+  BRACES,
+  PARENTHS,
+
   ADMINS,
   PRESCRIPTION,
   FOURS,

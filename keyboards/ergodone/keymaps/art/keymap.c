@@ -56,6 +56,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   ergodox_right_led_1_off();
   ergodox_right_led_3_off();
   switch (get_highest_layer(state)) {
+    case WORKMAN:
     case NAV:
     case CTRL_NAV:
     case SHIFT_NAV:
@@ -96,18 +97,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,           KC_Q,         KC_W,       KC_E,       KC_R,              KC_T,      KC_BSLASH,
   KC_CAPS,          KC_A,         KC_S,       KC_D,       KC_F,              KC_G,
   KC_LSFT,          KC_Z,         KC_X,       KC_C,       KC_V,              KC_B,      TT(FKEYS),
-  KC_LCTRL,         KC_LWIN,      KC_LALT, LT(MEDIA, KC_LEFT), LT(NAV, KC_RIGHT),
+//KC_LCTRL,         KC_LWIN,      KC_LALT, LT(MEDIA, KC_LEFT), LT(NAV, KC_RIGHT),
+  KC_LEFT,         KC_RIGHT,      KC_LWIN,    KC_LALT,    KC_LCTRL,
 
                                            KC_DEL,    KC_INS,
-                                                      KC_PGUP,
-                                  KC_SPC, LT(COMBOS,KC_BSPC), KC_PGDOWN,
+                                                      LT(MEDIA,KC_PGUP),
+                                  KC_SPC,  KC_BSPC,   LT(NAV,KC_PGDOWN),
 
   // -----------------------------------------------------right hand-----------------------------------------------------
   KC_MINS,          KC_6,         KC_7,       KC_8,       KC_9,              KC_0,      KC_RBRC,
   KC_EQL,           KC_Y,         KC_U,       KC_I,       KC_O,              KC_P,      KC_LBRC,
-                    KC_H,         KC_J,       KC_K,       KC_L,              KC_SCLN,   KC_QUOT,
+                    KC_H,         KC_J,       KC_K,       KC_L,              KC_SCLN,   LT(COMBOS,KC_QUOT),
   TT(FKEYS),        KC_N,         KC_M,       KC_COMM,    KC_DOT,        LT(GIT,KC_SLSH), KC_RSFT,
-                                  KC_HOME,    KC_END,     DF(WORKMAN),       KC_RALT,   KC_RCTRL,
+                                  KC_HOME,    KC_END,     TO(WORKMAN),       KC_RALT,   KC_RCTRL,
 
     KC_LEFT,                KC_RIGHT,
     LT(SHIFT_NAV, KC_UP),
@@ -150,8 +152,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,          _______,      _______,    _______,    _______,           _______,   _______,
   _______,          KC_J,         KC_F,       KC_U,       KC_P,              KC_SCLN,   _______,
                     KC_Y,         KC_N,       KC_E,       KC_O,              KC_I,      _______,
-  _______,          KC_K,         KC_L,       KC_COMM,    KC_DOT,            KC_SLSH,   _______,
-                                  _______,    _______,    DF(QWERTY),        _______,   _______,
+  _______,          KC_K,         KC_L,       _______,    _______,           _______,   _______,
+                                  _______,    _______,    TO(QWERTY),        _______,   _______,
 
     _______,  _______,
     _______,
@@ -191,7 +193,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                                             _______,   _______,
                                                        _______,
-                                  _______,  KC_DEL,    _______,                               
+                                  KC_DEL,   _______,   _______,                               
   // -----------------------------------------------------right hand-----------------------------------------------------
   _______,          LALT(KC_F6),      LALT(KC_F7),      LALT(KC_F8),      LALT(KC_F9),      LALT(KC_F10),     LALT(KC_F11),
   _______,          _______,          _______,          _______,          _______,          _______,          LALT(KC_F12),
@@ -209,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,          _______,          _______,          _______,          _______,          _______,          _______,
   _______,          _______,          CTL_ALT(KC_HOME), CTL_ALT(KC_UP),   CTL_ALT(KC_END),  CTL_ALT(KC_PGUP), _______,
   _______,          _______,          CTL_ALT(KC_LEFT), CTL_ALT(KC_DOWN), CTL_ALT(KC_RIGHT),CTL_ALT(KC_PGDOWN),
-  _______,          _______,          CTL_ALT(KC_X),    CTL_ALT(KC_C),    CTL_ALT(KC_V),    _______,          _______,
+  _______,          _______,          LCTL(KC_X),       LCTL(KC_C),       LCTL(KC_V),    _______,          _______,
   _______,          _______,          _______,          _______,          _______,
 
                                             CTL_ALT(KC_DEL),  _______,
@@ -354,7 +356,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
   XXXXXXX,          XXXXXXX,          XXXXXXX,          G_CHEC,           XXXXXXX,          XXXXXXX,
   _______,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
-  _______,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
+  XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,
 
                                             XXXXXXX,   XXXXXXX,
                                                        XXXXXXX,
@@ -378,7 +380,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
   XXXXXXX,          XXXXXXX,          G_STSH,           G_SHOW,           G_STAT,           XXXXXXX,
   _______,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
-  _______,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
+  XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,
 
                                             XXXXXXX,   XXXXXXX,
                                                        XXXXXXX,
