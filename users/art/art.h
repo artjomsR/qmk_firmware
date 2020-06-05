@@ -33,6 +33,7 @@ enum custom_keycodes_art {
   CTRL_CTV = SAFE_RANGE,
   CTRL_LCTV,
   CTRL_CAV,
+  BEAT_BROWSER,
   SARCASM,
 
   TOG_OS,
@@ -43,6 +44,7 @@ enum custom_keycodes_art {
   TILD_BLOCK,
   BRACES,
   PARENTHS,
+  QUOTES,
 
   ADMINS,
   PRESCRIPTION,

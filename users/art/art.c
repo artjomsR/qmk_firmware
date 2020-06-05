@@ -210,6 +210,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     /* -------------------------------------------------------------------------
      *                            CUSTOM MACROS
      * ------------------------------------------------------------------------ */
+    
     case CTRL_CTV:
       if (record->event.pressed) {
         bool shifted = get_mods() & MOD_MASK_SHIFT;
@@ -219,9 +220,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         wait_ms(copy_delay);
         SEND_STRING(SS_LCTL("tv"));
 
-        if (shifted) {
+        if (!shifted) {
           SEND_STRING(SS_TAP(X_ENTER));
         }
+      }
+      break;
+    case BEAT_BROWSER:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("c"));
+        wait_ms(copy_delay);
+        SEND_STRING(SS_LGUI("1") SS_LCTL("tv") SS_TAP(X_ENTER));
       }
       break;
     case CTRL_LCTV:
@@ -323,19 +331,41 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //   break;
     case TILD_BLOCK:
       if (record->event.pressed) {
-        SEND_STRING("```" SS_LSFT(SS_TAP(X_ENTER) SS_TAP(X_ENTER)) "```" SS_TAP(X_UP));
-        char_to_del = 4;
+        if (get_mods() & MOD_MASK_SHIFT) {
+          clear_mods();
+          SEND_STRING("```" SS_LSFT(SS_TAP(X_ENTER) SS_TAP(X_ENTER)) "```" SS_TAP(X_UP));
+          char_to_del = 4;
+        } else {
+          SEND_STRING("``" SS_TAP(X_LEFT));
+        }
       }
       break;
     case BRACES:
       if (record->event.pressed) {
         SEND_STRING(SS_TAP(X_LBRC) SS_TAP(X_RBRC));
+
         uint8_t mod_state = get_mods() & MOD_MASK_SHIFT;
-          del_mods(mod_state);
-
+        del_mods(mod_state);
         SEND_STRING(SS_TAP(X_LEFT));
-          add_mods(mod_state);
+        add_mods(mod_state);
+      }
+      break;
+    case PARENTHS:
+      if (record->event.pressed) {
+        add_mods(MOD_LSFT);
+        SEND_STRING(SS_TAP(X_9) SS_TAP(X_0));
+        clear_mods();
+        SEND_STRING(SS_TAP(X_LEFT));
+      }
+      break;
+    case QUOTES:
+      if (record->event.pressed) {
+        SEND_STRING("''");
 
+        uint8_t mod_state = get_mods() & MOD_MASK_SHIFT;
+        del_mods(mod_state);
+        SEND_STRING(SS_TAP(X_LEFT));
+        add_mods(mod_state);
       }
       break;
     case ADMINS:
