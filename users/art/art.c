@@ -479,9 +479,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       send_string_remembering_length("git merge ");
     }
     break;
-  case G_P:
+  case G_PULL:
     if (record->event.pressed) {
-      send_shifted_strings_add("git pu", "sh -u ");
+      send_string_remembering_length("git pull ");
+    }
+    break;
+  case G_PUSH:
+    if (record->event.pressed) {
+      send_string_remembering_length("git push -u ");
     }
     break;
   case G_RST:
