@@ -20,7 +20,6 @@ void led_show_current_os(void) {
     ergodox_right_led_1_on();
     wait_ms(50);
     ergodox_right_led_1_off();
-    wait_ms(50);
   } else {
     ergodox_right_led_3_on();
     wait_ms(50);
@@ -33,8 +32,27 @@ void led_show_current_os(void) {
     ergodox_right_led_3_on();
     wait_ms(50);
     ergodox_right_led_3_off();
-    wait_ms(50);
   }
+}
+
+void blink_all_leds(void) {
+  ergodox_right_led_1_on();
+  ergodox_right_led_3_on();
+  wait_ms(50);
+  ergodox_right_led_1_off();
+  ergodox_right_led_3_off();
+  wait_ms(50);
+  ergodox_right_led_1_on();
+  ergodox_right_led_3_on();
+  wait_ms(50);
+  ergodox_right_led_1_off();
+  ergodox_right_led_3_off();
+  wait_ms(50);
+  ergodox_right_led_1_on();
+  ergodox_right_led_3_on();
+  wait_ms(50);
+  ergodox_right_led_1_off();
+  ergodox_right_led_3_off();
 }
 
 void matrix_init_user(void) {

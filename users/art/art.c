@@ -7,8 +7,10 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 }
 
 __attribute__ ((weak))
-void led_show_current_os(void) {
-}
+void led_show_current_os(void) {}
+
+__attribute__ ((weak))
+void blink_all_leds(void) {}
 
 static bool mac_ctrl_on = false; //for switching tabs
 static bool mac_gui_on = false; //for switching languages
@@ -76,6 +78,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
+    case XXXXXXX:
+      if (record->event.pressed && is_mac_with_base_layer_off()) {
+        blink_all_leds();
+        return true;
+      }
     case KC_TAB:
       if (record->event.pressed && is_mac_with_base_layer_off()) {
         uint8_t mod_state = get_mods() & MOD_MASK_CTRL;
