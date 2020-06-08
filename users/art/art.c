@@ -79,7 +79,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   switch (keycode) {
     case XXXXXXX:
-      if (record->event.pressed && is_mac_with_base_layer_off()) {
+      if (record->event.pressed && !layer_state_is(BASE)) {
         blink_all_leds();
         return true;
       }
