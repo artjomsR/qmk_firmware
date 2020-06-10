@@ -72,6 +72,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   writePinLow(SCROLLLOCK_LED_PIN);
   switch (get_highest_layer(state)) {
     case MEDIA:
+    case WORKMAN:
       writePinHigh(SCROLLLOCK_LED_PIN);
     case BASE:
       writePinHigh(NUMLOCK_LED_PIN);
