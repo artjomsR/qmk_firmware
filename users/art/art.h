@@ -43,6 +43,7 @@ enum custom_keycodes_art {
 
   TILD_BLOCK,
   BRACES,
+  DASHES,
   PARENTHS,
   QUOTES,
   QUOTES_RU,

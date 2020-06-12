@@ -357,6 +357,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         add_mods(mod_state);
       }
       break;
+    case DASHES:
+      if (record->event.pressed) {
+        SEND_STRING("--");
+
+        uint8_t mod_state = get_mods() & MOD_MASK_SHIFT;
+        del_mods(mod_state);
+        SEND_STRING(SS_TAP(X_LEFT));
+        add_mods(mod_state);
+      }
+      break;
     case PARENTHS:
       if (record->event.pressed) {
         add_mods(MOD_LSFT);
