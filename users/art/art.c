@@ -349,7 +349,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case BRACES:
       if (record->event.pressed) {
-        SEND_STRING(SS_TAP(X_LBRC) SS_TAP(X_RBRC));
+        SEND_STRING("[]");
 
         uint8_t mod_state = get_mods() & MOD_MASK_SHIFT;
         del_mods(mod_state);
@@ -360,7 +360,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case PARENTHS:
       if (record->event.pressed) {
         add_mods(MOD_LSFT);
-        SEND_STRING(SS_TAP(X_9) SS_TAP(X_0));
+        SEND_STRING("()");
         clear_mods();
         SEND_STRING(SS_TAP(X_LEFT));
       }
@@ -375,6 +375,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         add_mods(mod_state);
       }
       break;
+    case QUOTES_RU:
+      if (record->event.pressed) {
+        add_mods(MOD_LSFT);
+        SEND_STRING("@@");
+        clear_mods();
+        SEND_STRING(SS_TAP(X_LEFT));
+      }
+      break;
+
     case ADMINS:
       if (record->event.pressed) {
         send_shifted_strings_add("admin", "/aurora/status");

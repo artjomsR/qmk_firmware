@@ -45,6 +45,7 @@ enum custom_keycodes_art {
   BRACES,
   PARENTHS,
   QUOTES,
+  QUOTES_RU,
 
   ADMINS,
   PRESCRIPTION,
