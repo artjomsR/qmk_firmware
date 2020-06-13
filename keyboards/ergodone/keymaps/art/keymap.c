@@ -252,7 +252,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,          _______,          _______,          _______,          _______,          _______,          _______,
   _______,          _______,          LSFT(KC_HOME),    LSFT(KC_UP),      LSFT(KC_END),     LSFT(KC_PGUP),    _______,
   _______,          _______,          LSFT(KC_LEFT),    LSFT(KC_DOWN),    LSFT(KC_RIGHT),   LSFT(KC_PGDOWN),
-  _______,          _______,          _______,          _______,          _______,          _______,          _______,
+  _______,          _______,          LCTL(KC_X),       LCTL(KC_C),       LCTL(KC_V),       _______,          _______,
   _______,          _______,          _______,          _______,          _______,
 
                                             _______,   _______,
