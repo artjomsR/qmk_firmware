@@ -105,8 +105,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case KC_LSFT:
       if (record->event.pressed && is_mac_with_base_layer_off() && !mac_ctrl_on) {
-        uint8_t mods = get_mods(); //!
-        uint8_t mod_state = mods & MOD_MASK_AG;
+        uint8_t mod_state = get_mods() & MOD_MASK_AG;
         if (get_mods() & mod_state) {
           del_mods(mod_state);
           add_mods(MOD_LGUI);
