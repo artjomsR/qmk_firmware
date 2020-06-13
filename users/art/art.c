@@ -83,6 +83,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         blink_all_leds();
         return true;
       }
+      break;
     case KC_TAB:
       if (record->event.pressed && is_mac_with_base_layer_off()) {
         uint8_t mod_state = get_mods() & MOD_MASK_CTRL;
@@ -338,6 +339,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //   break;
     case TILD_BLOCK:
       if (record->event.pressed) {
+        uint8_t switch_lang_state = get_mods() & MOD_MASK_CTRL;
+        if (switch_lang_state) {
+          del_mods(switch_lang_state);
+          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+        }
+
         if (get_mods() & MOD_MASK_SHIFT) {
           clear_mods();
           SEND_STRING("```" SS_LSFT(SS_TAP(X_ENTER) SS_TAP(X_ENTER)) "```" SS_TAP(X_UP));
@@ -345,26 +352,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         } else {
           SEND_STRING("``" SS_TAP(X_LEFT));
         }
+
+        if (switch_lang_state) {
+          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+        }
       }
       break;
     case BRACES:
       if (record->event.pressed) {
+        uint8_t switch_lang_state = get_mods() & MOD_MASK_CTRL;
+        if (switch_lang_state) {
+          del_mods(switch_lang_state);
+          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+        }
+
         SEND_STRING("[]");
 
-        uint8_t mod_state = get_mods() & MOD_MASK_SHIFT;
-        del_mods(mod_state);
+        uint8_t shifted = get_mods() & MOD_MASK_SHIFT;
+        del_mods(shifted);
         SEND_STRING(SS_TAP(X_LEFT));
-        add_mods(mod_state);
+        add_mods(shifted);
+
+        if (switch_lang_state) {
+          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+        }
       }
       break;
     case DASHES:
       if (record->event.pressed) {
         SEND_STRING("--");
 
-        uint8_t mod_state = get_mods() & MOD_MASK_SHIFT;
-        del_mods(mod_state);
+        uint8_t shifted = get_mods() & MOD_MASK_SHIFT;
+        del_mods(shifted);
         SEND_STRING(SS_TAP(X_LEFT));
-        add_mods(mod_state);
+        add_mods(shifted);
       }
       break;
     case PARENTHS:
@@ -377,12 +398,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case QUOTES:
       if (record->event.pressed) {
+        uint8_t switch_lang_state = get_mods() & MOD_MASK_CTRL;
+        if (switch_lang_state) {
+          del_mods(switch_lang_state);
+          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+        }
+
         SEND_STRING("''");
 
-        uint8_t mod_state = get_mods() & MOD_MASK_SHIFT;
-        del_mods(mod_state);
+        uint8_t shifted = get_mods() & MOD_MASK_SHIFT;
+        del_mods(shifted);
         SEND_STRING(SS_TAP(X_LEFT));
-        add_mods(mod_state);
+        add_mods(shifted);
+
+        if (switch_lang_state) {
+          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+        }
       }
       break;
     case QUOTES_RU:
