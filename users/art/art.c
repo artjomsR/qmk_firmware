@@ -25,6 +25,9 @@ static bool sarcasm_key = false;
 static const int copy_delay = 50;
 static const int incognito_delay = 500;
 
+bool is_lmb_timer_active = false;
+uint16_t lmb_timer = 0;
+
 void backspace_n_times(int times) {
   for (int i=0; i<times; i++) {
     SEND_STRING(SS_TAP(X_BSPC));  
@@ -59,6 +62,18 @@ void send_shifted_strings_add(char *string1, char *string2) {
 
 bool is_mac_with_base_layer_off(void) {
   return !is_win && !layer_state_is(BASE);
+}
+
+void matrix_scan_user(void) {
+  if (is_lmb_timer_active) {
+    if (timer_elapsed(lmb_timer) > 1000) {
+      //do stuff that needs spamming
+      SEND_STRING(SS_TAP(X_BTN1));
+      SEND_STRING(SS_TAP(X_A));
+
+      lmb_timer = timer_read();
+    }
+  }
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -273,6 +288,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         del_mods(MOD_LSFT);
         sarcasm_on = !sarcasm_on;
+      }
+      break;
+    case LMB_SPAM:
+      if (record->event.pressed) {
+        is_lmb_timer_active = ! is_lmb_timer_active;
+        lmb_timer = timer_read();
       }
       break;
 

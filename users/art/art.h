@@ -10,8 +10,9 @@ enum layer_names {
   WORKMAN,  
   BASE, //only specific for split75
 #if defined(KEYBOARD_wheatfield_split75)
-  QWERTY_MOD,
+  CONFIG,
   LAYOUT_CHG,
+  QWERTY_MOD,
 #elif defined(KEYBOARD_ergodone)
   FKEYS,
   CTRL_NAV,
@@ -21,7 +22,6 @@ enum layer_names {
   MEDIA,
   COMBOS,
   //STRINGS,
-  CONFIG,
   NAV,
   NUMPAD,
   GIT,
@@ -35,6 +35,7 @@ enum custom_keycodes_art {
   CTRL_CAV,
   BEAT_BROWSER,
   SARCASM,
+  LMB_SPAM,
 
   TOG_OS,
   CTR_ALT,
