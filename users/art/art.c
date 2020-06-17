@@ -24,6 +24,7 @@ static bool sarcasm_key = false;
 
 static const int copy_delay = 50;
 static const int incognito_delay = 500;
+static const int lmb_spam_interval = 30;
 
 bool is_lmb_timer_active = false;
 uint16_t lmb_timer = 0;
@@ -66,11 +67,8 @@ bool is_mac_with_base_layer_off(void) {
 
 void matrix_scan_user(void) {
   if (is_lmb_timer_active) {
-    if (timer_elapsed(lmb_timer) > 1000) {
-      //do stuff that needs spamming
-      SEND_STRING(SS_TAP(X_BTN1));
-      SEND_STRING(SS_TAP(X_A));
-
+    if (timer_elapsed(lmb_timer) > lmb_spam_interval) {
+      SEND_STRING(SS_TAP(X_BTN1)); //do stuff that needs spamming
       lmb_timer = timer_read();
     }
   }
