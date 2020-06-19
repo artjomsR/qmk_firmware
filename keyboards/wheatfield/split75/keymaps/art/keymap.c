@@ -107,7 +107,7 @@ KC_VOLD,KC_VOLU, KC_GRAVE, KC_1,    KC_2,    KC_3,   KC_4,   KC_5,   KC_6,      
 KC_MPRV,KC_MNXT, KC_TAB,   KC_Q,    KC_W,    KC_E,   KC_R,   KC_T,                 KC_Y,   KC_U,   KC_I,    KC_O,   KC_P,    KC_LBRC,  KC_RBRC,  KC_BSLS,           KC_END,
 KC_HOME,KC_END,  KC_CAPS,  KC_A,    KC_S,    KC_D,   KC_F,   KC_G,   KC_H,   KC_J, KC_K, KC_L, KC_SCLN,KC_QUOT,KC_ENTER,         KC_PGUP,
 DYN_MACRO_PLAY1,KC_MUTE,KC_LSFT,KC_Z,KC_X,KC_C,  KC_V,   KC_B,                 KC_N,   KC_M,   KC_COMM, KC_DOT, LT(GIT,KC_SLSH),                     KC_RSFT,  KC_UP,   KC_PGDN,
-DYN_REC_STOP,DYN_REC_START1,KC_LCTL, KC_LGUI, KC_LALT, LT(MEDIA,KC_SPC), LT(COMBOS,KC_BSPC),            MO(NAV),       LT(LAYOUT_CHG, KC_ENTER),KC_RALT,KC_RCTL,                     KC_LEFT,  KC_DOWN, KC_RIGHT
+DYN_REC_STOP,DYN_REC_START1,KC_LCTL, KC_LGUI, KC_LALT, LT(MEDIA,KC_SPC), LT(COMBOS,KC_BSPC),          MO(NAV),  LT(LAYOUT_CHG, KC_ENTER),KC_RALT,KC_RCTL,   KC_LEFT,  KC_DOWN, KC_RIGHT
   ),
 
   /* Base          ,-----------------------------------------.     ,-----------------------------------------------------.
@@ -131,7 +131,7 @@ KC_8,  KC_9,    KC_GRAVE, KC_1,    KC_2,    KC_3,   KC_4,   KC_5,   KC_6,       
 KC_6,  KC_7,    KC_TAB,   KC_Q,    KC_W,    KC_E,   KC_R,   KC_T,                 KC_Y,   KC_U,   KC_I,    KC_O,   KC_P,    KC_LBRC,  KC_RBRC,  KC_BSLS,           KC_END,
 KC_4,  KC_5,    KC_CAPS,  KC_A,    KC_S,    KC_D,   KC_F,   KC_G,                 KC_H,   KC_J,   KC_K,    KC_L,   KC_SCLN, KC_QUOT,  KC_ENTER,                    KC_PGUP,
 KC_2,  KC_3,    KC_LSFT,  KC_Z,    KC_X,    KC_C,   KC_V,   KC_B,                 KC_N,   KC_M,   KC_COMM, KC_DOT, KC_SLSH,                     KC_RSFT,  KC_UP,   KC_PGDN,
-KC_0,  KC_1,    OS_CTRL,  OS_WIN,  KC_LALT, KC_SPC, KC_SPC,                       KC_SPC,         KC_RALT, MO(QWERTY_MOD),  KC_RCTL,            KC_LEFT,  KC_DOWN, KC_RIGHT
+KC_0,  KC_1,    OS_CTRL,  OS_WIN,  KC_LALT, KC_SPC, KC_SPC,                       KC_SPC,      MO(QWERTY_MOD), KC_RALT, KC_RCTL,           KC_LEFT,  KC_DOWN, KC_RIGHT
   ),
 
   [WORKMAN] = LAYOUT(
@@ -141,7 +141,7 @@ _______,  _______,    _______,  _______,  _______,  _______,  _______,  _______,
 _______,  _______,    _______,  KC_Q,     KC_D,     KC_R,     KC_W,     KC_B,                 KC_J,     KC_F,      KC_U,     KC_P,     KC_SCLN,  _______,  _______,  _______,           _______,
 _______,  _______,    _______,  KC_A,     KC_S,     KC_H,     KC_T,     KC_G,                 KC_Y,     KC_N,      KC_E,     KC_O,     KC_I,     _______,  _______,           _______,
 _______,  _______,    _______,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_M,                 KC_K,     KC_L,      KC_COMM,  KC_DOT,   _______,                      _______, _______,  _______,
-_______,  _______,    _______, _______,   _______,  _______,  _______,                        _______,             _______,  TO(QWERTY), _______,           _______, _______,  _______
+_______,  _______,    _______, _______,   _______,  _______,  _______,                        _______,            TO(QWERTY), _______, _______,           _______, _______,  _______
   ),
   
   [NAV] = LAYOUT(
@@ -191,7 +191,7 @@ _______,  _______,    _______,  _______,  _______,  _______,  _______,  _______,
 _______,  _______,    _______,  KC_MPRV,  KC_VOLU,  KC_MNXT,  _______,  _______,              _______,  _______,   _______,  _______,  _______,  _______,  _______,  _______,           _______,
 _______,  _______,    _______,  _______,  KC_VOLD,  _______,  _______,  _______,              _______,  _______,   _______,  _______,  _______,  _______,  _______,                     _______,
 _______,  _______,    _______,  _______,  KC_MUTE,  KC_MPLY,  _______,  _______,              _______,  _______,   _______,  _______,  _______,                      _______, _______,  _______,
-_______,  _______,    TO(QWERTY),_______, _______,  _______,  _______,                        _______,             _______, _______,   _______,                      _______, _______,  _______
+_______,  _______,   TO(QWERTY),_______,  _______,  _______,  _______,                        _______,             _______,  _______,  _______,                      _______, _______,  _______
   ),
   
   [LAYOUT_CHG] = LAYOUT(
@@ -211,7 +211,7 @@ RGB_VAI,  RGB_VAD,    RGB_MODE_PLAIN,  RGB_MODE_BREATHE,  RGB_MODE_RAINBOW,  RGB
 RGB_SAI,  RGB_SAD,    _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,   _______,  TOG_OS,  _______,  _______,  _______,  _______,           _______,
 RGB_HUI,  RGB_HUD,    _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,   _______,  _______,  _______,  _______,  _______,                     _______,
 RGB_MOD,  RGB_RMOD,   _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,   _______,  _______,  _______,                      _______, _______,  _______,
-RGB_TOG,  _______,    _______,  _______,  _______,  _______,  _______,                        _______,             _______, _______,   _______,                      _______, _______,  _______
+RGB_TOG,  _______,    _______,  _______,  _______,  _______,  _______,                        _______,             _______,  _______,  _______,                      _______, _______,  _______
   ),
 
   [NUMPAD] = LAYOUT(
@@ -251,7 +251,7 @@ XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
 XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,              XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,           XXXXXXX,
 XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  G_STSH,   G_SHOW,   G_STAT,   XXXXXXX,              XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                     XXXXXXX,
 XXXXXXX,  XXXXXXX,    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,              XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,                      _______, XXXXXXX,  XXXXXXX,
-XXXXXXX,  XXXXXXX,    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,                        XXXXXXX,             XXXXXXX, XXXXXXX,   _______,                      XXXXXXX, XXXXXXX,  XXXXXXX
+XXXXXXX,  XXXXXXX,    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,                        XXXXXXX,             XXXXXXX,  XXXXXXX,  _______,                      XXXXXXX, XXXXXXX,  XXXXXXX
   ),   
   
  /*                ,-----------------------------------------.     ,-----------------------------------------------------.
@@ -275,7 +275,7 @@ XXXXXXX,  XXXXXXX,    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,          
 // _______,  _______,    _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,   _______,  _______,  _______,  _______,  _______,  _______,           _______,
 // _______,  _______,    _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,   _______,  _______,  _______,  _______,  _______,                     _______,
 // _______,  _______,    _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,   _______,  _______,  _______,                      _______, _______,  _______,
-// _______,  _______,    _______,  _______,  _______,  _______,  _______,                        _______,             _______, _______,   _______,                      _______, _______,  _______
+// _______,  _______,    _______,  _______,  _______,  _______,  _______,                        _______,             _______,  _______,  _______,                      _______, _______,  _______
   // ),
 };
 
