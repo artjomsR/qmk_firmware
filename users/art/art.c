@@ -18,7 +18,8 @@ static bool mac_alt_window_switching_on = false; //for switching windows
 
 static const uint8_t os_mod_keys[2] = {MOD_LALT, MOD_LCTL};
 
-int char_to_del = 1;
+int char_to_bspace = 1;
+int char_to_del = 0;
 static bool sarcasm_on = false;
 static bool sarcasm_key = false;
 
@@ -35,9 +36,21 @@ void backspace_n_times(int times) {
   }
 }
 
+void del_n_times(int times) {
+  for (int i=0; i<times; i++) {
+    SEND_STRING(SS_TAP(X_DEL));  
+  }
+}
+
+// void key_n_times(int times, uint16_t key) {
+//   for (int i=0; i<times; i++) {
+//     send_string(SS_TAP(key));  
+//   }
+// }
+
 void send_string_remembering_length(char *string) {
   send_string(string);
-  char_to_del = strlen(string);
+  char_to_bspace = strlen(string);
 }
 
 void send_shifted_strings(char *string1, char *string2) {
@@ -57,7 +70,7 @@ void send_shifted_strings_add(char *string1, char *string2) {
 
   if (shifted) {
     send_string(string2);
-    char_to_del = strlen(string1) + strlen(string2);
+    char_to_bspace = strlen(string1) + strlen(string2);
   }
 }
 
@@ -77,8 +90,9 @@ void matrix_scan_user(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     //Checking all other non-backspace keys to clear the backspace buffer. This is to prevent the bug of deleting N chars sometime after using a macro
-    if (keycode != KC_BSPACE && keycode != XXXXXXX) {
-      char_to_del = 1;
+    if (keycode != KC_BSPACE && keycode != KC_DEL && keycode != XXXXXXX) {
+      char_to_bspace = 1;
+      char_to_del = 0;
     }
 
     if (sarcasm_on) {
@@ -152,16 +166,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       }
       break;
-    case KC_DEL:
-      if (record->event.pressed && is_mac_with_base_layer_off()) {
-        uint8_t mod_state = get_mods() & MOD_MASK_CTRL;
-        if (get_mods() & mod_state) {
-          del_mods(mod_state);
-          add_mods(MOD_LALT);
-          mac_ctrl_on = true;
-        }
-      }
-      break;
     case KC_LALT:
       if (!record->event.pressed && is_mac_with_base_layer_off()) {
         if (mac_alt_window_switching_on) {
@@ -206,13 +210,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
       break;
+    case KC_DEL:
     case KC_BSPC:
       if (record->event.pressed) {
-        if (char_to_del > 1) {
+        if (char_to_bspace > 1 || char_to_del > 0) {
           layer_off(GIT_C);
           layer_off(GIT_S);
-          backspace_n_times(char_to_del);
-          char_to_del = 1;
+
+          backspace_n_times(char_to_bspace);
+          char_to_bspace = 1;
+          del_n_times(char_to_del);
+          //backspace_n_times(char_to_del);
+          char_to_del = 0;
+
           return false;
         }
 
@@ -368,9 +378,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (shifted) {
           clear_mods();
           SEND_STRING("```" SS_LSFT(SS_TAP(X_ENTER) SS_TAP(X_ENTER)) "```" SS_TAP(X_UP));
+          char_to_bspace = 4;
           char_to_del = 4;
         } else {
           SEND_STRING("``" SS_TAP(X_LEFT));
+          char_to_bspace = 1;
+          char_to_del = 1; 
         }
 
         if (switch_lang_state) {
@@ -397,6 +410,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (switch_lang_state) {
           SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
         }
+        char_to_bspace = 1;
+        char_to_del = 1;
       }
       break;
     case DASHES:
@@ -407,6 +422,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         del_mods(shifted);
         SEND_STRING(SS_TAP(X_LEFT));
         add_mods(shifted);
+        char_to_bspace = 1;
+        char_to_del = 1;
       }
       break;
     case PARENTHS:
@@ -415,6 +432,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("()");
         clear_mods();
         SEND_STRING(SS_TAP(X_LEFT));
+        char_to_bspace = 1;
+        char_to_del = 1;        
       }
       break;
     case QUOTES:
@@ -436,6 +455,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (switch_lang_state) {
           SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
         }
+        char_to_bspace = 1;
+        char_to_del = 1;        
       }
       break;
     case QUOTES_RU:
@@ -444,6 +465,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("@@");
         clear_mods();
         SEND_STRING(SS_TAP(X_LEFT));
+        char_to_bspace = 1;
+        char_to_del = 1;        
       }
       break;
 
@@ -455,7 +478,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case PRESCRIPTION:
       if (record->event.pressed) {
         SEND_STRING("55\t12122019\t");
-        char_to_del = 8;
+        char_to_bspace = 8;
       }
       break;
     case FOURS:
@@ -467,7 +490,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("\t1222123");
         wait_ms(copy_delay);
         SEND_STRING("\n");
-        char_to_del = 16;
+        char_to_bspace = 16;
       }
       break;
       
@@ -494,10 +517,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             
       backspace_n_times(15);
       SEND_STRING("heckout ");
-      char_to_del = 13;
+      char_to_bspace = 13;
       if (shifted) {
         SEND_STRING("-b ");
-        char_to_del = 16;
+        char_to_bspace = 16;
       }
       layer_off(GIT_C);
     }
@@ -510,7 +533,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
       backspace_n_times(15);
       SEND_STRING("ommit ");
-      char_to_del = 11;
+      char_to_bspace = 11;
       layer_off(GIT_C);
 
       if (ctrled) {
@@ -518,12 +541,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
 
       SEND_STRING("-");
-      char_to_del = 15;
+      char_to_bspace = 15;
       if (shifted) {
         SEND_STRING("a");
-        char_to_del = 16;
+        char_to_bspace = 16;
       }
       SEND_STRING("m \"\"" SS_TAP(X_LEFT));
+      char_to_del = 1;
     }
     break;
   case G_DEV:
@@ -576,7 +600,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!record->event.pressed) {
       backspace_n_times(16);
       SEND_STRING("how ");
-      char_to_del = 9;
+      char_to_bspace = 9;
       layer_off(GIT_S);
     }
     break;			
@@ -587,13 +611,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
       backspace_n_times(16);
       SEND_STRING("tash ");
-      char_to_del = 10;
+      char_to_bspace = 10;
 
       if (shifted) {
         clear_mods();
         SEND_STRING("apply ");
 
-        char_to_del = 16;
+        char_to_bspace = 16;
       }
 
       layer_off(GIT_S);
@@ -603,7 +627,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!record->event.pressed) {
       backspace_n_times(16);
       SEND_STRING("tatus ");
-      char_to_del = 11;
+      char_to_bspace = 11;
       layer_off(GIT_S);
     }
     break;
