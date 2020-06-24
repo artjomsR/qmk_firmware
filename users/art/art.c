@@ -48,6 +48,15 @@ void del_n_times(int times) {
 //   }
 // }
 
+void switch_lang(void) {
+  if (is_win) {
+    SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+  } else {
+    SEND_STRING(SS_LGUI(SS_TAP(X_SPACE)));
+    wait_ms(10);
+  }
+}
+
 void send_string_remembering_length(char *string) {
   send_string(string);
   char_to_bspace = strlen(string);
@@ -372,7 +381,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         if (switch_lang_state) {
           del_mods(switch_lang_state);
-          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+          switch_lang();
         }
 
         if (shifted) {
@@ -387,7 +396,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
 
         if (switch_lang_state) {
-          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+          switch_lang();
         }
       }
       break;
@@ -397,7 +406,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         uint8_t switch_lang_state = get_mods() & MOD_MASK_CTRL;
         if (switch_lang_state) {
           del_mods(switch_lang_state);
-          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+          switch_lang();
         }
 
         add_mods(shifted);
@@ -408,7 +417,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         add_mods(shifted);
 
         if (switch_lang_state) {
-          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+          switch_lang();
         }
         char_to_bspace = 1;
         char_to_del = 1;
@@ -442,7 +451,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         uint8_t switch_lang_state = get_mods() & MOD_MASK_CTRL;
         if (switch_lang_state) {
           del_mods(switch_lang_state);
-          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+          switch_lang();
         }
 
         add_mods(shifted);
@@ -453,7 +462,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         add_mods(shifted);
 
         if (switch_lang_state) {
-          SEND_STRING(SS_LALT(SS_TAP(X_LSFT)));
+          switch_lang();
         }
         char_to_bspace = 1;
         char_to_del = 1;        
