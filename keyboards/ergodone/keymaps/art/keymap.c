@@ -1,7 +1,6 @@
 #include "art.h"
 #include "sendstring_workman_zxcvm.h"
-
-bool is_win = true;
+#include "user_config.c"
 
 enum custom_keycodes {
   keyboardSpecificKeyCode = NEW_SAFE_RANGE //not used

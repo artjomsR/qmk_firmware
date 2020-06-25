@@ -40,6 +40,8 @@ doxygen/
 /keyboards/*/*/*/*/keymaps/Makefile
 /keyboards/*/*/*/*/*/keymaps/Makefile
 
+user_config.c
+
 # Eclipse/PyCharm/Other IDE Settings
 .cproject
 .project
