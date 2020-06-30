@@ -30,23 +30,12 @@ static const int lmb_spam_interval = 30;
 bool is_lmb_timer_active = false;
 uint16_t lmb_timer = 0;
 
-void backspace_n_times(int times) {
+void press_n_times(int times, uint16_t key) {
   for (int i=0; i<times; i++) {
-    SEND_STRING(SS_TAP(X_BSPC));  
+    // wait_ms(20);
+    tap_code16(key);
   }
 }
-
-void del_n_times(int times) {
-  for (int i=0; i<times; i++) {
-    SEND_STRING(SS_TAP(X_DEL));  
-  }
-}
-
-// void key_n_times(int times, uint16_t key) {
-//   for (int i=0; i<times; i++) {
-//     send_string(SS_TAP(key));  
-//   }
-// }
 
 void switch_lang(void) {
   if (is_win) {
@@ -226,10 +215,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(GIT_C);
           layer_off(GIT_S);
 
-          backspace_n_times(char_to_bspace);
+          press_n_times(char_to_bspace, KC_BSPACE);
           char_to_bspace = 1;
-          del_n_times(char_to_del);
-          //backspace_n_times(char_to_del);
+          press_n_times(char_to_del, KC_DEL);
           char_to_del = 0;
 
           return false;
@@ -531,7 +519,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       bool shifted = get_mods() & MOD_MASK_SHIFT;
       clear_mods();
             
-      backspace_n_times(15);
+      press_n_times(15, KC_BSPACE);
       SEND_STRING("heckout ");
       char_to_bspace = 13;
       if (shifted) {
@@ -547,7 +535,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       bool shifted = get_mods() & MOD_MASK_SHIFT;
       clear_mods();
 
-      backspace_n_times(15);
+      press_n_times(15, KC_BSPACE);
       SEND_STRING("ommit ");
       char_to_bspace = 11;
       layer_off(GIT_C);
@@ -614,7 +602,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
   case G_SHOW:
     if (!record->event.pressed) {
-      backspace_n_times(16);
+      press_n_times(16, KC_BSPACE);
       SEND_STRING("how ");
       char_to_bspace = 9;
       layer_off(GIT_S);
@@ -625,7 +613,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       bool shifted = get_mods() & MOD_MASK_SHIFT;
       clear_mods();
 
-      backspace_n_times(16);
+      press_n_times(16, KC_BSPACE);
       SEND_STRING("tash ");
       char_to_bspace = 10;
 
@@ -641,7 +629,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;		
   case G_STAT:
     if (!record->event.pressed) {
-      backspace_n_times(16);
+      press_n_times(16, KC_BSPACE);
       SEND_STRING("tatus ");
       char_to_bspace = 11;
       layer_off(GIT_S);
