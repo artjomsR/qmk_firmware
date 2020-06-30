@@ -301,6 +301,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING(SS_LCTL("av"));
       }
       break;
+    case NEUTRAL_COPY:
+      if (record->event.pressed && is_win) {
+        SEND_STRING(SS_LCTL("c"));
+        wait_ms(copy_delay);
+        SEND_STRING(SS_LGUI("r") SS_LCTL("vac") SS_TAP(X_ESC));
+      }
+      break;
     case SARCASM:
       if (record->event.pressed) {
         del_mods(MOD_LSFT);

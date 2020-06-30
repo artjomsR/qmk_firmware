@@ -34,6 +34,7 @@ enum custom_keycodes_art {
   CTRL_LCTV,
   CTRL_CAV,
   BEAT_BROWSER,
+  NEUTRAL_COPY,
   SARCASM,
   LMB_SPAM,
 
