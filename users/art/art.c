@@ -639,9 +639,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case CTL_ALT_START ... CTL_ALT_END:
     if (record->event.pressed) {
       if (is_win) {
-        tap_code16(LCTL(keycode - CTL_ALT_START));
+        register_code16(LCTL(keycode - CTL_ALT_START));
       } else {
-        tap_code16(LALT(keycode - CTL_ALT_START));
+        register_code16(LALT(keycode - CTL_ALT_START));
+      }
+    } else {
+      if (is_win) {
+        unregister_code16(LCTL(keycode - CTL_ALT_START));
+      } else {
+        unregister_code16(LALT(keycode - CTL_ALT_START));
       }
     }
     break;
