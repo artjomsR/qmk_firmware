@@ -44,6 +44,7 @@ enum custom_keycodes_art {
   OS_WIN,
 
   TILD_BLOCK,
+  ALL_BEST,
   BRACES,
   DASHES,
   PARENTHS,

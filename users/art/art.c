@@ -86,19 +86,27 @@ void matrix_scan_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-    //Checking all other non-backspace keys to clear the backspace buffer. This is to prevent the bug of deleting N chars sometime after using a macro
-    if (keycode != KC_BSPACE && keycode != KC_DEL && keycode != XXXXXXX) {
-      char_to_bspace = 1;
-      char_to_del = 0;
+  if (sarcasm_on) {
+    sarcasm_key = ! sarcasm_key;
+    del_mods(MOD_LSFT);
+    if (sarcasm_key) {
+      add_mods(MOD_LSFT);
     }
+  }
 
-    if (sarcasm_on) {
-      sarcasm_key = ! sarcasm_key;
-      del_mods(MOD_LSFT);
-      if (sarcasm_key) {
-        add_mods(MOD_LSFT);
-      }
+  //Checking all other non-backspace keys to clear the backspace buffer. This is to prevent the bug of deleting N chars sometime after using a macro
+  if (record->event.pressed) {
+    switch (keycode) {
+      case KC_BSPACE:
+      case KC_DEL:
+      case KC_LSFT:
+      case KC_RSFT:
+      case XXXXXXX:
+        break;
+      default:
+        char_to_bspace = 1;
+        char_to_del = 0;
+        break;
     }
   }
 
@@ -366,7 +374,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //   break;
     // case :
     //   if (record->event.pressed) {
-    //     send_string_remembering_length("", "");
+    //     send_shifted_strings("", "");
     //   }
     //   break;
     case TILD_BLOCK:
@@ -393,6 +401,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (switch_lang_state) {
           switch_lang();
         }
+      }
+      break;
+    case ALL_BEST:
+      if (record->event.pressed) {
+        send_shifted_strings_add("All the best,\nArt", "joms");
       }
       break;
     case BRACES:

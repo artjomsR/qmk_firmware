@@ -275,7 +275,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // -----------------------------------------------------left hand-----------------------------------------------------
   TILD_BLOCK,       PRESCRIPTION,     QUOTES_RU,        _______,          FOURS,            _______,          _______,
   _______,          _______,          _______,          _______,          NEUTRAL_COPY,     BEAT_BROWSER,     _______,
-  _______,          ADMINS,           SARCASM,          _______,          CTRL_CTV,         _______,
+  _______,          ADMINS,           SARCASM,          ALL_BEST,         CTRL_CTV,         _______,
   _______,          _______,          _______,          CTRL_CAV,         _______,          LMB_SPAM,         _______,
   _______,          _______,          _______,          _______,          _______,
 
