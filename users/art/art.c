@@ -523,7 +523,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
   case G_C:
     if (record->event.pressed) {
-      send_string_remembering_length("git c[Heckout/Ommit]");
+      send_string_remembering_length("git c[Heckout/heRRy-pick/Ommit]");
       layer_on(GIT_C);
     }
     break;
@@ -532,7 +532,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       bool shifted = get_mods() & MOD_MASK_SHIFT;
       clear_mods();
             
-      press_n_times(15, KC_BSPACE);
+      press_n_times(26, KC_BSPACE);
       SEND_STRING("heckout ");
       char_to_bspace = 13;
       if (shifted) {
@@ -542,13 +542,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       layer_off(GIT_C);
     }
     break;
+  case G_CHER:
+    if (!record->event.pressed) {
+      press_n_times(26, KC_BSPACE);
+      SEND_STRING("herry-pick ");
+      char_to_bspace = 16;
+      layer_off(GIT_C);
+    }
+    break;
   case G_COMM:
     if (!record->event.pressed) {
       bool ctrled = get_mods() & MOD_MASK_CTRL;
       bool shifted = get_mods() & MOD_MASK_SHIFT;
       clear_mods();
 
-      press_n_times(15, KC_BSPACE);
+      press_n_times(26, KC_BSPACE);
       SEND_STRING("ommit ");
       char_to_bspace = 11;
       layer_off(GIT_C);
