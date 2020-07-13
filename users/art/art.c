@@ -76,6 +76,30 @@ bool is_mac_with_base_layer_off(void) {
   return !is_win && !layer_state_is(BASE);
 }
 
+bool handle_del_bspace(void) {
+  if (char_to_bspace > 1 || char_to_del > 0) {
+    layer_off(GIT_C);
+    layer_off(GIT_S);
+
+    press_n_times(char_to_bspace, KC_BSPACE);
+    char_to_bspace = 1;
+    press_n_times(char_to_del, KC_DEL);
+    char_to_del = 0;
+
+    return false;
+  }
+
+  if (is_mac_with_base_layer_off()) {
+    uint8_t mod_state = get_mods() & MOD_MASK_CTRL;
+    if (get_mods() & mod_state) {
+      del_mods(mod_state);
+      add_mods(MOD_LALT);
+      mac_ctrl_on = true;
+    }
+  }
+  return true;
+}
+
 void matrix_scan_user(void) {
   if (is_lmb_timer_active) {
     if (timer_elapsed(lmb_timer) > lmb_spam_interval) {
@@ -97,6 +121,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   //Checking all other non-backspace keys to clear the backspace buffer. This is to prevent the bug of deleting N chars sometime after using a macro
   if (record->event.pressed) {
     switch (keycode) {
+      case LT(COMBOS,KC_BSPC):
       case KC_BSPACE:
       case KC_DEL:
       case KC_LSFT:
@@ -216,29 +241,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
       break;
+    case LT(COMBOS, KC_BSPC):
+      if (record->event.pressed && record->tap.count == 1) {
+        handle_del_bspace();
+      }
+      break;
     case KC_DEL:
     case KC_BSPC:
       if (record->event.pressed) {
-        if (char_to_bspace > 1 || char_to_del > 0) {
-          layer_off(GIT_C);
-          layer_off(GIT_S);
-
-          press_n_times(char_to_bspace, KC_BSPACE);
-          char_to_bspace = 1;
-          press_n_times(char_to_del, KC_DEL);
-          char_to_del = 0;
-
-          return false;
-        }
-
-        if (is_mac_with_base_layer_off()) {
-          uint8_t mod_state = get_mods() & MOD_MASK_CTRL;
-          if (get_mods() & mod_state) {
-            del_mods(mod_state);
-            add_mods(MOD_LALT);
-            mac_ctrl_on = true;
-          }
-        }
+        handle_del_bspace();
       }
       break;
 
