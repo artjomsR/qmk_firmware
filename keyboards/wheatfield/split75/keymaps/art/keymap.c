@@ -14,27 +14,27 @@ bool led_update_user(led_t led_state) {
 void led_show_current_os(void) {
   if (is_win) {
     writePinHigh(NUMLOCK_LED_PIN);
-    wait_ms(50);
+    wait_ms(BLINKING_INTERVAL);
     writePinLow(NUMLOCK_LED_PIN);
-    wait_ms(50);
+    wait_ms(BLINKING_INTERVAL);
     writePinHigh(NUMLOCK_LED_PIN);
-    wait_ms(50);
+    wait_ms(BLINKING_INTERVAL);
     writePinLow(NUMLOCK_LED_PIN);
-    wait_ms(50);
+    wait_ms(BLINKING_INTERVAL);
     writePinHigh(NUMLOCK_LED_PIN);
-    wait_ms(50);
+    wait_ms(BLINKING_INTERVAL);
     writePinLow(NUMLOCK_LED_PIN);
   } else {
     writePinHigh(SCROLLLOCK_LED_PIN);
-    wait_ms(50);
+    wait_ms(BLINKING_INTERVAL);
     writePinLow(SCROLLLOCK_LED_PIN);
-    wait_ms(50);
+    wait_ms(BLINKING_INTERVAL);
     writePinHigh(SCROLLLOCK_LED_PIN);
-    wait_ms(50);
+    wait_ms(BLINKING_INTERVAL);
     writePinLow(SCROLLLOCK_LED_PIN);
-    wait_ms(50);
+    wait_ms(BLINKING_INTERVAL);
     writePinHigh(SCROLLLOCK_LED_PIN);
-    wait_ms(50);
+    wait_ms(BLINKING_INTERVAL);
     writePinLow(SCROLLLOCK_LED_PIN);
   }
 }
@@ -42,19 +42,19 @@ void led_show_current_os(void) {
 void blink_all_leds(void) {
   writePinHigh(NUMLOCK_LED_PIN);
   writePinHigh(SCROLLLOCK_LED_PIN);
-  wait_ms(50);
+  wait_ms(BLINKING_INTERVAL);
   writePinLow(NUMLOCK_LED_PIN);
   writePinLow(SCROLLLOCK_LED_PIN);
-  wait_ms(50);
+  wait_ms(BLINKING_INTERVAL);
   writePinHigh(NUMLOCK_LED_PIN);
   writePinHigh(SCROLLLOCK_LED_PIN);
-  wait_ms(50);
+  wait_ms(BLINKING_INTERVAL);
   writePinLow(NUMLOCK_LED_PIN);
   writePinLow(SCROLLLOCK_LED_PIN);
-  wait_ms(50);
+  wait_ms(BLINKING_INTERVAL);
   writePinHigh(NUMLOCK_LED_PIN);
   writePinHigh(SCROLLLOCK_LED_PIN);
-  wait_ms(50);
+  wait_ms(BLINKING_INTERVAL);
   writePinLow(NUMLOCK_LED_PIN);
   writePinLow(SCROLLLOCK_LED_PIN);
   

@@ -12,6 +12,7 @@ void led_show_current_os(void) {}
 __attribute__ ((weak))
 void blink_all_leds(void) {}
 
+
 static bool mac_ctrl_on = false; //for switching tabs
 static bool mac_gui_on = false; //for switching languages
 static bool mac_alt_window_switching_on = false; //for switching windows
