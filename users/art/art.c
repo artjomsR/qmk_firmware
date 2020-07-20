@@ -244,13 +244,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case LT(COMBOS, KC_BSPC):
       if (record->event.pressed && record->tap.count == 1) {
-        handle_del_bspace();
+        return handle_del_bspace();
       }
       break;
     case KC_DEL:
     case KC_BSPC:
       if (record->event.pressed) {
-        handle_del_bspace();
+        return handle_del_bspace();
       }
       break;
 
