@@ -111,16 +111,16 @@ void matrix_scan_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (sarcasm_on) {
-    sarcasm_key = ! sarcasm_key;
-    del_mods(MOD_LSFT);
-    if (sarcasm_key) {
-      add_mods(MOD_LSFT);
-    }
-  }
-
-  //Checking all other non-backspace keys to clear the backspace buffer. This is to prevent the bug of deleting N chars sometime after using a macro
   if (record->event.pressed) {
+    if (sarcasm_on) {
+      sarcasm_key = ! sarcasm_key;
+      del_mods(MOD_LSFT);
+      if (sarcasm_key) {
+        add_mods(MOD_LSFT);
+      }
+    }
+
+    //Checking all other non-backspace keys to clear the backspace buffer. This is to prevent the bug of deleting N chars sometime after using a macro
     switch (keycode) {
       case LT(COMBOS,KC_BSPC):
       case KC_BSPACE:
