@@ -498,6 +498,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         char_to_del = 1;        
       }
       break;
+    case STARS:
+      if (record->event.pressed) {
+        add_mods(MOD_LSFT);
+        SEND_STRING("**");
+        clear_mods();
+        SEND_STRING(SS_TAP(X_LEFT));
+        char_to_bspace = 1;
+        char_to_del = 1;        
+      }
+      break;
 
     case ADMINS:
       if (record->event.pressed) {

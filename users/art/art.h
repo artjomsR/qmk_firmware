@@ -49,6 +49,7 @@ enum custom_keycodes_art {
   BRACES,
   DASHES,
   PARENTHS,
+  STARS,
   QUOTES,
   QUOTES_RU,
 
