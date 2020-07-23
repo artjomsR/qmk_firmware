@@ -391,7 +391,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //   break;
     case TILD_BLOCK:
       if (record->event.pressed) {
-        uint8_t shifted = get_mods() & MOD_MASK_SHIFT;
+        uint8_t alted = get_mods() & MOD_MASK_ALT;
         uint8_t switch_lang_state = get_mods() & MOD_MASK_CTRL;
 
         if (switch_lang_state) {
@@ -399,16 +399,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           switch_lang();
         }
 
-        if (shifted) {
-          clear_mods();
-          SEND_STRING("```" SS_LSFT(SS_TAP(X_ENTER) SS_TAP(X_ENTER)) "```" SS_TAP(X_UP));
+        if (alted) {
+          del_mods(alted);
+          SEND_STRING(SS_TAP(X_ESC) "```" SS_LSFT(SS_TAP(X_ENTER) SS_TAP(X_ENTER)) "```" SS_TAP(X_UP));
           char_to_bspace = 4;
           char_to_del = 4;
         } else {
-          SEND_STRING("``" SS_TAP(X_LEFT));
+          SEND_STRING("`` ");
+
+          uint8_t shifted = get_mods() & MOD_MASK_SHIFT;
+          del_mods(shifted);
+          SEND_STRING(SS_TAP(X_LEFT) SS_TAP(X_LEFT));
+          add_mods(shifted);
           char_to_bspace = 1;
-          char_to_del = 1; 
-        }
+          char_to_del = 2;
+        } 
 
         if (switch_lang_state) {
           switch_lang();
