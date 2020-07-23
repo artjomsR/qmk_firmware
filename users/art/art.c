@@ -449,20 +449,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         uint8_t shifted = get_mods() & MOD_MASK_SHIFT;
         del_mods(shifted);
-        SEND_STRING(SS_TAP(X_LEFT));
+        SEND_STRING(" " SS_TAP(X_LEFT) SS_TAP(X_LEFT));
         add_mods(shifted);
         char_to_bspace = 1;
-        char_to_del = 1;
+        char_to_del = 2;
       }
       break;
     case PARENTHS:
       if (record->event.pressed) {
-        add_mods(MOD_LSFT);
-        SEND_STRING("()");
         clear_mods();
-        SEND_STRING(SS_TAP(X_LEFT X_LEFT));
+        SEND_STRING("() " SS_TAP(X_LEFT) SS_TAP(X_LEFT));
         char_to_bspace = 1;
-        char_to_del = 1;        
+        char_to_del = 2;
       }
       break;
     case QUOTES:
@@ -479,35 +477,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         del_mods(shifted);
         wait_ms(LONG_TYPING_INTERVAL);
-        SEND_STRING(SS_TAP(X_LEFT));
+        SEND_STRING(" " SS_TAP(X_LEFT) SS_TAP(X_LEFT));
         add_mods(shifted);
 
         if (switch_lang_state) {
           switch_lang();
         }
         char_to_bspace = 1;
-        char_to_del = 1;        
+        char_to_del = 2;
       }
       break;
     case QUOTES_RU:
       if (record->event.pressed) {
-        add_mods(MOD_LSFT);
-        SEND_STRING("@@");
         clear_mods();
+        SEND_STRING("@@ ");
         wait_ms(LONG_TYPING_INTERVAL);
-        SEND_STRING(SS_TAP(X_LEFT));
+        SEND_STRING(SS_TAP(X_LEFT) SS_TAP(X_LEFT));
         char_to_bspace = 1;
-        char_to_del = 1;        
+        char_to_del = 2;
       }
       break;
     case STARS:
       if (record->event.pressed) {
-        add_mods(MOD_LSFT);
-        SEND_STRING("**");
         clear_mods();
-        SEND_STRING(SS_TAP(X_LEFT));
+        SEND_STRING("** " SS_TAP(X_LEFT) SS_TAP(X_LEFT));
         char_to_bspace = 1;
-        char_to_del = 1;        
+        char_to_del = 2;
       }
       break;
 
