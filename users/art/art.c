@@ -33,7 +33,7 @@ uint16_t lmb_timer = 0;
 
 void press_n_times(int times, uint16_t key) {
   for (int i=0; i<times; i++) {
-    // wait_ms(20);
+    // wait_ms(TYPING_INTERVAL);
     tap_code16(key);
   }
 }
@@ -460,7 +460,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         add_mods(MOD_LSFT);
         SEND_STRING("()");
         clear_mods();
-        SEND_STRING(SS_TAP(X_LEFT));
+        SEND_STRING(SS_TAP(X_LEFT X_LEFT));
         char_to_bspace = 1;
         char_to_del = 1;        
       }
@@ -478,6 +478,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("''");
 
         del_mods(shifted);
+        wait_ms(LONG_TYPING_INTERVAL);
         SEND_STRING(SS_TAP(X_LEFT));
         add_mods(shifted);
 
@@ -493,6 +494,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         add_mods(MOD_LSFT);
         SEND_STRING("@@");
         clear_mods();
+        wait_ms(LONG_TYPING_INTERVAL);
         SEND_STRING(SS_TAP(X_LEFT));
         char_to_bspace = 1;
         char_to_del = 1;        
