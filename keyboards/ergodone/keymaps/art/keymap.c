@@ -6,8 +6,8 @@ enum custom_keycodes {
   keyboardSpecificKeyCode = NEW_SAFE_RANGE //not used
 };
 
-void led_show_current_os(void) {
-  if (is_win) {
+void led_show_variable_status(bool value) {
+  if (value) {
     ergodox_right_led_1_on();
     wait_ms(BLINKING_INTERVAL);
     ergodox_right_led_1_off();
@@ -55,7 +55,7 @@ void blink_all_leds(void) {
 }
 
 void matrix_init_user(void) {
-  led_show_current_os();
+  led_show_variable_status(is_win);
 }
 
 void led_set_user(uint8_t usb_led) {

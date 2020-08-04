@@ -7,7 +7,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 }
 
 __attribute__ ((weak))
-void led_show_current_os(void) {}
+void led_show_variable_status(bool value) {}
 
 __attribute__ ((weak))
 void blink_all_leds(void) {}
@@ -320,6 +320,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         del_mods(MOD_LSFT);
         sarcasm_on = !sarcasm_on;
+        led_show_variable_status(sarcasm_on);
       }
       break;
     case LMB_SPAM:
@@ -335,7 +336,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case TOG_OS:
       if (record->event.pressed) {
         is_win = ! is_win;
-        led_show_current_os();
+        led_show_variable_status(is_win);
       }
       break;
     case CTR_ALT:

@@ -11,8 +11,8 @@ bool led_update_user(led_t led_state) {
   return false;
 }
 
-void led_show_current_os(void) {
-  if (is_win) {
+void led_show_variable_status(bool value) {
+  if (value) {
     writePinHigh(NUMLOCK_LED_PIN);
     wait_ms(BLINKING_INTERVAL);
     writePinLow(NUMLOCK_LED_PIN);
@@ -62,7 +62,7 @@ void blink_all_leds(void) {
 }
 
 void keyboard_pre_init_user(void) {
-  led_show_current_os();
+  led_show_variable_status(is_win);
   layer_state_set_user(layer_state);
 }
 
@@ -207,7 +207,7 @@ TO(NUMPAD), TO(NUMPAD), TO(BASE),  _______,  _______,  _______,  CTL_ALT(KC_BSPC
 //--------------------------------Left Hand-----------------------------------------------| |--------------------------------Right Hand------------------------------------------------
                       _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,   _______,  _______,  _______,  _______,  _______,  _______,  _______, _______,
 RGB_VAI,  RGB_VAD,    RGB_MODE_PLAIN,  RGB_MODE_BREATHE,  RGB_MODE_RAINBOW,  RGB_MODE_SWIRL,  RGB_MODE_SNAKE,  RGB_MODE_KNIGHT,  RGB_MODE_XMAS,  RGB_MODE_GRADIENT,   RGB_MODE_RGBTEST,  XXXXXXX,  XXXXXXX,  _______,  _______,  _______,           _______,
-RGB_SAI,  RGB_SAD,    _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,   _______,  TOG_OS,  _______,  _______,  _______,  _______,           _______,
+RGB_SAI,  RGB_SAD,    _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,   _______,  XXXXXXX,  _______,  _______,  _______,  _______,           _______,
 RGB_HUI,  RGB_HUD,    _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,   _______,  _______,  _______,  _______,  _______,                     _______,
 RGB_MOD,  RGB_RMOD,   _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,   _______,  _______,  _______,                      _______, _______,  _______,
 RGB_TOG,  _______,    _______,  _______,  _______,  _______,  _______,                        _______,             _______,  _______,  _______,                      _______, _______,  _______
