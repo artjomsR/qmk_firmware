@@ -43,6 +43,7 @@ enum custom_keycodes_art {
 
   TOG_OS,
   CTR_ALT,
+  CTR_ALT_SHIFT,
   OS_CTRL,
   OS_WIN,
 

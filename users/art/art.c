@@ -346,6 +346,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_mods(os_mod_keys[is_win]);
       }
       break;
+    case CTR_ALT_SHIFT:
+      if (record->event.pressed) {
+        add_mods(os_mod_keys[is_win]);
+        add_mods(MOD_RSFT);
+      } else {
+        unregister_mods(os_mod_keys[is_win]);
+        unregister_mods(MOD_RSFT);
+      }
+      break;
     case OS_CTRL:
       if (is_win) {
         if (record->event.pressed) {
