@@ -242,15 +242,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
       break;
+    case KC_DEL:
+    case KC_BSPC:
+      if (record->event.pressed) {
+        return handle_del_bspace();
+      }
+      break;
     case LT(COMBOS, KC_BSPC):
       if (record->event.pressed && record->tap.count == 1) {
         return handle_del_bspace();
       }
       break;
-    case KC_DEL:
-    case KC_BSPC:
-      if (record->event.pressed) {
-        return handle_del_bspace();
+    case MO(NAV):
+      if (!record->event.pressed) {
+        mac_ctrl_on = false;
+        mac_gui_on = false;
+        mac_alt_window_switching_on = false;
+        clear_mods();
+        return true;
       }
       break;
 
