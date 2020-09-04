@@ -346,7 +346,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [GIT] = LAYOUT_ergodox(  
   // -----------------------------------------------------left hand-----------------------------------------------------
   _______,          _______,          _______,          _______,          _______,          _______,          _______,
-  _______,          _______,          G_DIFF,           G_RST,            _______,          G_BRCH,          _______,
+  _______,          _______,          G_DIFF,           G_R,              _______,          G_BRCH,          _______,
   _______,          G_ADD,            G_S,              _______,          _______,          _______,
   _______,          G_DEV,            _______,          G_C,              _______,          G_MERG,          _______,
   _______,          _______,          _______,          _______,          _______,
@@ -372,6 +372,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
   XXXXXXX,          XXXXXXX,          XXXXXXX,          G_CHER,           XXXXXXX,          XXXXXXX,          XXXXXXX,
   XXXXXXX,          XXXXXXX,          XXXXXXX,          G_CHEC,           XXXXXXX,          XXXXXXX,
+  _______,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
+  XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,
+
+                                            XXXXXXX,   XXXXXXX,
+                                                       XXXXXXX,
+                                  XXXXXXX,  KC_BSPC,   XXXXXXX,
+
+  // -----------------------------------------------------right hand-----------------------------------------------------
+  XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
+  XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
+                    XXXXXXX,          XXXXXXX,          XXXXXXX,          G_COMM,           XXXXXXX,          XXXXXXX,
+  XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,
+                    XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,
+
+    XXXXXXX,     XXXXXXX,
+    XXXXXXX,
+    XXXXXXX,     XXXXXXX,    XXXXXXX
+),
+
+[GIT_R] = LAYOUT_ergodox(  
+  // -----------------------------------------------------left hand-----------------------------------------------------
+  XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
+  XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          G_RBASE,          XXXXXXX,
+  XXXXXXX,          XXXXXXX,          G_RST,            XXXXXXX,          XXXXXXX,          XXXXXXX,
   _______,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
   XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,
 

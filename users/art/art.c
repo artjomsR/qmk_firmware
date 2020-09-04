@@ -80,6 +80,7 @@ bool is_mac_with_base_layer_off(void) {
 bool handle_del_bspace(void) {
   if (char_to_bspace > 1 || char_to_del > 0) {
     layer_off(GIT_C);
+    layer_off(GIT_R);
     layer_off(GIT_S);
 
     press_n_times(char_to_bspace, KC_BSPACE);
@@ -658,9 +659,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       send_string_remembering_length("git push -u ");
     }
     break;
+  case G_R:
+    if (!record->event.pressed) {
+      send_string_remembering_length("git re[Set/Base -i]");
+      layer_on(GIT_R);
+    }
+    break;
+  case G_RBASE:
+    if (!record->event.pressed) {
+      press_n_times(13, KC_BSPACE);
+      SEND_STRING("base -i ");
+      char_to_bspace = 14;
+      layer_off(GIT_R);
+    }
+    break;
   case G_RST:
-    if (record->event.pressed) {
-      send_string_remembering_length("git reset ");
+    if (!record->event.pressed) {
+      press_n_times(13, KC_BSPACE);
+      SEND_STRING("set ");
+      char_to_bspace = 10;
+      layer_off(GIT_R);
     }
     break;
   case G_S:

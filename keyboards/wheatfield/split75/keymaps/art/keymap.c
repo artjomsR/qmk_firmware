@@ -227,7 +227,7 @@ KC_0,  KC_1,    _______,  _______,  _______,  _______,  _______,                
 //--------------------------------Left Hand-----------------------------------------------| |--------------------------------Right Hand------------------------------------------------
                       _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,   _______,  _______,  _______,  _______,  _______,  _______,  _______, _______,
 _______,  _______,    _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,   _______,  _______,  _______,  _______,  _______,  _______,           _______,
-_______,  _______,    _______,  _______,  G_DIFF,   G_RST,    _______,  G_BRCH,               _______,   G_FTCH,   G_PULL,   G_PUSH,   _______,  _______,  _______,  _______,           _______,
+_______,  _______,    _______,  _______,  G_DIFF,   G_R,      _______,  G_BRCH,               _______,   G_FTCH,   G_PULL,   G_PUSH,   _______,  _______,  _______,  _______,           _______,
 _______,  _______,    _______,  G_ADD,    G_S,      _______,  _______,  _______,              _______,  _______,   _______,  _______,  _______,  _______,  _______,                     _______,
 _______,  _______,    _______,  G_DEV,    _______,  G_C,      _______,  G_MERG,               _______,   G_LOG,    _______,  XXXXXXX,  _______,                      _______, _______,  _______,
 _______,  _______,    _______,  _______,  _______,  _______,  _______,                        _______,             _______,  _______,  _______,                      _______, _______,  _______
@@ -242,6 +242,16 @@ XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  G_CHEC,   XXXXXXX,  XXXXXXX,
 XXXXXXX,  XXXXXXX,    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,              XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,                      _______, XXXXXXX,  XXXXXXX,
 XXXXXXX,  XXXXXXX,    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,                        XXXXXXX,             XXXXXXX,  XXXXXXX,  _______,                      XXXXXXX, XXXXXXX,  XXXXXXX
   ),
+
+  [GIT_R] = LAYOUT(
+//--------------------------------Left Hand-----------------------------------------------| |--------------------------------Right Hand------------------------------------------------
+                      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,              XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,
+XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,              XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,           XXXXXXX,
+XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  G_RBASE,              XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,           XXXXXXX,
+XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  G_RST,    XXXXXXX,  XXXXXXX,  XXXXXXX,              XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                     XXXXXXX,
+XXXXXXX,  XXXXXXX,    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,              XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,                      _______, XXXXXXX,  XXXXXXX,
+XXXXXXX,  XXXXXXX,    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,                        XXXXXXX,             XXXXXXX,  XXXXXXX,  _______,                      XXXXXXX, XXXXXXX,  XXXXXXX
+  ), 
   
   [GIT_S] = LAYOUT(
 //--------------------------------Left Hand-----------------------------------------------| |--------------------------------Right Hand------------------------------------------------

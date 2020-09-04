@@ -74,6 +74,8 @@ enum custom_keycodes_art {
   G_MERG,
   G_PULL,
   G_PUSH,
+  G_R,
+  G_RBASE,
   G_RST,
   G_S,
   G_STAT,
