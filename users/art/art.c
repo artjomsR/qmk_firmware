@@ -323,11 +323,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed && is_win) {
         uint8_t shifted = get_mods() & MOD_MASK_SHIFT;
         if (shifted) {
+          del_mods(shifted);
           SEND_STRING(SS_LCTL("z"));
-        } else {
-          SEND_STRING(SS_LCTL("c"));
-          wait_ms(copy_delay);
         }
+        SEND_STRING(SS_LCTL("c"));
+        wait_ms(copy_delay);
         SEND_STRING(SS_LGUI("r") SS_LCTL("vac") SS_TAP(X_ESC));
       }
       break;
