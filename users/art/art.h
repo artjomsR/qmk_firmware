@@ -29,6 +29,7 @@ enum layer_names {
   NUMPAD,
   GIT,
   GIT_C,
+  GIT_R,
   GIT_S
 };
 
