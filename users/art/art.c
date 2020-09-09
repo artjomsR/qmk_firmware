@@ -675,9 +675,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
   case G_RST:
     if (!record->event.pressed) {
+      bool shifted = get_mods() & MOD_MASK_SHIFT;
+      clear_mods();
+
       press_n_times(13, KC_BSPACE);
       SEND_STRING("set ");
       char_to_bspace = 10;
+
+      if (shifted) {
+        SEND_STRING("--hard ");
+        char_to_bspace = 17;
+      }
       layer_off(GIT_R);
     }
     break;
