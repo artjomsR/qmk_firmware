@@ -1,5 +1,6 @@
 #pragma once
 #include QMK_KEYBOARD_H
+#include "art_user_config.c"
 
 #define CTL_ALT(kc) (CTL_ALT_START + ((kc) & 0xff))
 
@@ -9,9 +10,15 @@ extern bool is_win;
 #define LONG_TYPING_INTERVAL 50
 
 enum layer_names {
+#if SPLIT75_PUBLIC_USE == 1 && defined(KEYBOARD_wheatfield_split75)
+  BASE,
   QWERTY,
-  WORKMAN,  
-  BASE, //only specific for split75
+#else
+  QWERTY,
+  BASE,
+#endif
+  
+  WORKMAN,
 #if defined(KEYBOARD_wheatfield_split75)
   CONFIG,
   LAYOUT_CHG,
