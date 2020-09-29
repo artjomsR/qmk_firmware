@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KC_LEFT,                KC_RIGHT,
     LT(SHIFT_NAV, KC_UP),
-    LT(CTRL_NAV, KC_DOWN),  MO(NAV),   KC_ENT
+    LT(CTRL_NAV, KC_DOWN), LT(NAV,KC_APP), KC_ENT
 ),
  /* Workman
  *
@@ -203,9 +203,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [NAV] = LAYOUT_ergodox(
   // -----------------------------------------------------left hand-----------------------------------------------------
   _______,          LALT(KC_F1),      LALT(KC_F2),      LALT(KC_F3),      LALT(KC_F4),      LALT(KC_F5),      _______,
-  _______,          _______,          KC_HOME,          KC_UP,            KC_END,           KC_PGUP,          _______,
-  _______,          _______,          KC_LEFT,          KC_DOWN,          KC_RIGHT,         KC_PGDOWN,
-  _______,          _______,          LCTL(KC_X),       LCTL(KC_C),       LCTL(KC_V),       _______,          _______,
+  _______,          KC_ESC,           KC_HOME,          KC_UP,            KC_END,           KC_PGUP,          _______,
+  _______,          XXXXXXX,          KC_LEFT,          KC_DOWN,          KC_RIGHT,         KC_PGDOWN,
+  _______,          XXXXXXX,          LCTL(KC_X),       LCTL(KC_C),       LCTL(KC_V),       XXXXXXX,          _______,
   _______,          _______,          _______,          _______,          _______,        
 
                                             _______,   _______,
@@ -213,9 +213,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   KC_DEL,   _______,   _______,                               
   // -----------------------------------------------------right hand-----------------------------------------------------
   _______,          LALT(KC_F6),      LALT(KC_F7),      LALT(KC_F8),      LALT(KC_F9),      LALT(KC_F10),     LALT(KC_F11),
-  _______,          _______,          _______,          _______,          _______,          _______,          LALT(KC_F12),
-                    _______,          CTR_ALT,          KC_RSFT,          CTR_ALT_SHIFT,    _______,          _______,
-  _______,          _______,          _______,          _______,          _______,          _______,          _______,
+  _______,          XXXXXXX,          KC_MS_BTN1,       KC_MS_BTN3,       KC_MS_BTN2,       _______,          LALT(KC_F12),
+                    KC_APP,           CTR_ALT,          KC_RSFT,          CTR_ALT_SHIFT,    _______,          _______,
+  _______,          XXXXXXX,          XXXXXXX,          _______,          _______,          _______,          _______,
                     _______,          _______,          _______,          _______,          _______,
 
     _______,     _______,
