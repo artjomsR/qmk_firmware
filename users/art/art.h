@@ -60,6 +60,7 @@ enum custom_keycodes_art {
   BRACES,
   DASHES,
   PARENTHS,
+  SM_READPNT,
   STARS,
   QUOTES,
   QUOTES_RU,

@@ -527,6 +527,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         char_to_del = 2;
       }
       break;
+    case SM_READPNT:
+      if (record->event.pressed) {
+        SEND_STRING(
+          SS_DOWN(X_LCTL) SS_TAP(X_F7)
+          SS_DOWN(X_LSFT) SS_TAP(X_HOME) SS_TAP(X_SCLN)
+          SS_UP(X_LSFT) SS_UP(X_LCTL)
+          SS_TAP(X_ESC));
+      }
+      break;
     case STARS:
       if (record->event.pressed) {
         clear_mods();
