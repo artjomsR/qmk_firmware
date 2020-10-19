@@ -396,7 +396,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
   XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          G_RBASE,          XXXXXXX,
   XXXXXXX,          XXXXXXX,          G_RST,            XXXXXXX,          XXXXXXX,          XXXXXXX,
-  _______,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
+  _______,          XXXXXXX,          XXXXXXX,          XXXXXXX,          G_RVERT,          XXXXXXX,          XXXXXXX,
   XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,
 
                                             XXXXXXX,   XXXXXXX,

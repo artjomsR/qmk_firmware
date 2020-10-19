@@ -84,6 +84,7 @@ enum custom_keycodes_art {
   G_PUSH,
   G_R,
   G_RBASE,
+  G_RVERT,
   G_RST,
   G_S,
   G_STAT,

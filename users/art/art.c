@@ -670,15 +670,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
   case G_R:
     if (!record->event.pressed) {
-      send_string_remembering_length("git re[Set/Base -i]");
+      send_string_remembering_length("git re[Set/Vert/Base -i]");
       layer_on(GIT_R);
     }
     break;
   case G_RBASE:
     if (!record->event.pressed) {
-      press_n_times(13, KC_BSPACE);
+      press_n_times(18, KC_BSPACE);
       SEND_STRING("base -i ");
       char_to_bspace = 14;
+      layer_off(GIT_R);
+    }
+    break;
+  case G_RVERT:
+    if (!record->event.pressed) {
+      press_n_times(18, KC_BSPACE);
+      SEND_STRING("vert ");
+      char_to_bspace = 11;
       layer_off(GIT_R);
     }
     break;
@@ -687,7 +695,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       bool shifted = get_mods() & MOD_MASK_SHIFT;
       clear_mods();
 
-      press_n_times(13, KC_BSPACE);
+      press_n_times(18, KC_BSPACE);
       SEND_STRING("set ");
       char_to_bspace = 10;
 
