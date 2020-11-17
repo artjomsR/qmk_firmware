@@ -254,12 +254,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return handle_del_bspace();
       }
       break;
-    case MO(NAV):
-      if (!record->event.pressed) {
+    case LT(NAV,KC_APP):
+      if (!record->event.pressed && !is_win) {
         mac_ctrl_on = false;
         mac_gui_on = false;
         mac_alt_window_switching_on = false;
         clear_mods();
+        SEND_STRING(SS_TAP(X_LCTL) SS_TAP(X_LGUI) SS_TAP(X_LALT) SS_TAP(X_LSFT));
         return true;
       }
       break;
