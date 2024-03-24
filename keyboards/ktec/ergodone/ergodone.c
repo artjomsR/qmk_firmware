@@ -5,7 +5,5 @@
 
 #include "ergodox_compat.h"
 void keyboard_post_init_kb(void) {
-    ergodox_blink_all_leds();
-
     keyboard_post_init_user();
 }
