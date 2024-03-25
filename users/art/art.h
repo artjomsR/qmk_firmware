@@ -21,12 +21,12 @@ enum layer_names {
 #endif
 
   WORKMAN,
+  GAMING,
 #if defined(KEYBOARD_mt_split75)
   CONFIG,
   LAYOUT_CHG,
   QWERTY_MOD,
 #elif defined(KEYBOARD_ktec_ergodone)
-  GAMING,
   FKEYS,
 #endif
 
