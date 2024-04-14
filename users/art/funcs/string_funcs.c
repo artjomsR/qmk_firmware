@@ -30,8 +30,8 @@ const uint16_t PROGMEM combo_right[] = {KC_R, KC_F, COMBO_END};
 const uint16_t PROGMEM combo_down[] = {KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM combo_l_click[] = {KC_F, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_r_click[] = {KC_D, KC_C, COMBO_END};
-const uint16_t PROGMEM combo_end[] = {KC_S, KC_F, COMBO_END};
 const uint16_t PROGMEM combo_home[] = {KC_W, KC_R, COMBO_END};
+const uint16_t PROGMEM combo_end[] = {KC_S, KC_F, COMBO_END};
 
 const uint16_t PROGMEM combo_ctrl_f_wman[] = {KC_G, KC_B, COMBO_END};
 const uint16_t PROGMEM combo_alt_pscr[] = {KC_LWIN, KC_LALT, KC_LCTL, COMBO_END};
