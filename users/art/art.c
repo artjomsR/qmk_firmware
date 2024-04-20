@@ -615,7 +615,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case G_PUSH:
       if (record->event.pressed) {
-        send_shifted_strings_add("git push -u origin HEAD ", "--force-with-lease ");
+        send_shifted_strings_add("git push ", "--force-with-lease ");
       }
       break;
     case G_R:
